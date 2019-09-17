@@ -1,0 +1,56 @@
+<section>
+  <div class="container">
+    <div class="form-group form-inline">
+      <input type="text" class="form-control" placeholder="Filtrar pelo tipo do WorkItem" id="inputDefault"
+        [(ngModel)]="typeFilter" />
+      <button type="button" (click)="getWorkItens()" class="btn btn-primary">Enviar</button>
+    </div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">
+            Code
+          </th>
+          <th scope="col">Type</th>
+          <th scope="col">Title</th>
+          <th scope="col" [class.active]="order === 'createDate'" (click)="setOrder('createDate')">
+            Date
+            <span [hidden]="reverse">▼</span>
+            <span [hidden]="!reverse">▲</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let wi of workitens
+                  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize
+                  | orderBy: order:reverse:'case-insensitive'"
+        >
+          <td>
+            <ngb-highlight [result]="wi.code"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight [result]="wi.type"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight [result]="wi.title"></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight [result]="wi.createDate | date: 'dd/MM/yyyy HH:mm:ss'"></ngb-highlight>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-between p-2">
+      <ngb-pagination class="d-flex justify-content-center" [collectionSize]="collectionSize" [(page)]="page"
+        [pageSize]="pageSize">
+      </ngb-pagination>
+
+      <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+        <option [ngValue]="5">5 items per page</option>
+        <option [ngValue]="10">10 items per page</option>
+        <option [ngValue]="20">20 items per page</option>
+      </select>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,30 @@
+<section>
+  <app-toast></app-toast>
+</section>
+
+<section>
+  <div class="container">
+    <form [formGroup]="formProject" (submit)="Save()">
+      <fieldset>
+        <legend>Project azure dev ops</legend>
+        <div class="form-group">
+          <label class="col-form-label" for="inputDefault">URL</label>
+          <input type="text" class="form-control" placeholder="Entre com a URL" formControlName="url">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label" for="inputDefault">Name</label>
+          <input type="text" class="form-control" placeholder="Entre com o Nome" id="inputDefault"
+            formControlName="name">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label" for="inputDefault">Personal Access Token</label>
+          <input type="text" class="form-control" placeholder="Entre com o Personal Access Token" id="inputDefault"
+            formControlName="personalAccessToken">
+        </div>
+        <button type="submit" class="btn btn-primary"
+          [disabled]="formProject.invalid">Enviar</button>
+        <button type="reset" class="btn btn-primary" (click)="clean()">Limpar</button>
+      </fieldset>
+    </form>
+  </div>
+</section>
